@@ -19,12 +19,17 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/dashboard" replace />,
+        element: <Navigate to="/beranda" replace />,
+      },
+
+      {
+        path: "beranda",
+        element: <DashboardPage />,
       },
 
       {
         path: "dashboard",
-        element: <DashboardPage />,
+        element: <Navigate to="/beranda" replace />,
       },
 
       {

@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import OrdersTable from "../../../components/orders/OrdersTable";
 import { useOrders } from "../../../contexts/OrdersContext";
 
@@ -19,8 +20,14 @@ const statusCards = [
 ];
 
 export default function NewOrdersPage() {
-  const [selectedMarketplace, setSelectedMarketplace] = useState("all");
+  const location = useLocation();
+  const initialMarketplace = (location.state as { selectedMarketplace?: string } | null)?.selectedMarketplace ?? "all";
+  const [selectedMarketplace, setSelectedMarketplace] = useState(initialMarketplace);
   const { orders } = useOrders();
+
+  useEffect(() => {
+    setSelectedMarketplace(initialMarketplace);
+  }, [initialMarketplace]);
 
   const marketplaceSummary = useMemo(() => {
     const counts = orders.reduce<Record<string, number>>((acc, order) => {

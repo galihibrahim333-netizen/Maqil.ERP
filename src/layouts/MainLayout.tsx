@@ -9,7 +9,7 @@ type MenuItem = {
 }
 
 const menuItems: MenuItem[] = [
-  { to: '/dashboard', label: 'Dashboard', icon: '◉' },
+  { to: '/beranda', label: 'Beranda', icon: '◉' },
   {
     label: 'Pesanan',
     icon: '◌',
@@ -39,7 +39,7 @@ export function MainLayout() {
   const currentTitle =
     menuItems.find((item) => item.to && location.pathname.startsWith(item.to))?.label ??
     menuItems.find((item) => item.children?.some((child) => location.pathname.startsWith(child.to)))?.label ??
-    'Dashboard'
+    'Beranda'
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-800">
