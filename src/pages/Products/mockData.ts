@@ -11,6 +11,7 @@ export interface ProductVariantItem {
   mappingStatus: MappingStatus;
   mappingDate?: string;
   suggestedSku?: string;
+  barcode?: string;
 }
 
 export interface ProductItem {
@@ -30,6 +31,21 @@ export interface SyncHistoryItem {
   failedCount: number;
 }
 
+export interface WarehouseItem {
+  code: string;
+  stock: number;
+  price: number;
+}
+
+export interface ProductRow extends ProductVariantItem {
+  productId: string;
+  productStatus: ProductStatus;
+  marketplace: string;
+  price: number;
+  stock: number;
+  warehouseCode: string;
+}
+
 export const productCatalog: ProductItem[] = [
   {
     id: "p1",
@@ -46,16 +62,18 @@ export const productCatalog: ProductItem[] = [
         internalSku: "INT-KAOS-HL",
         mappingStatus: "mapped",
         mappingDate: "2026-07-05",
+        barcode: "BAR-001",
       },
       {
         id: "v2",
         marketplace: "Shopee",
         productName: "Kaos Oversize Premium",
-        marketplaceVariant: "hitam l",
+        marketplaceVariant: "Hitam L",
         marketplaceSku: "SP-002",
         internalSku: "INT-KAOS-HL",
         mappingStatus: "mapped",
         mappingDate: "2026-07-05",
+        barcode: "BAR-002",
       },
       {
         id: "v3",
@@ -66,6 +84,7 @@ export const productCatalog: ProductItem[] = [
         internalSku: "INT-KAOS-PM",
         mappingStatus: "mapped",
         mappingDate: "2026-07-05",
+        barcode: "BAR-003",
       },
       {
         id: "v4",
@@ -75,6 +94,7 @@ export const productCatalog: ProductItem[] = [
         marketplaceSku: "SP-004",
         mappingStatus: "unmapped",
         suggestedSku: "INT-KAOS-MXL",
+        barcode: "BAR-004",
       },
     ],
   },
@@ -93,6 +113,7 @@ export const productCatalog: ProductItem[] = [
         internalSku: "INT-HOODIE-HL",
         mappingStatus: "mapped",
         mappingDate: "2026-07-04",
+        barcode: "BAR-005",
       },
       {
         id: "v6",
@@ -102,6 +123,7 @@ export const productCatalog: ProductItem[] = [
         marketplaceSku: "TD-002",
         mappingStatus: "unmapped",
         suggestedSku: "INT-HOODIE-AM",
+        barcode: "BAR-006",
       },
     ],
   },
@@ -120,6 +142,7 @@ export const productCatalog: ProductItem[] = [
         internalSku: "INT-CARGO-CS",
         mappingStatus: "mapped",
         mappingDate: "2026-07-06",
+        barcode: "BAR-007",
       },
       {
         id: "v8",
@@ -130,6 +153,7 @@ export const productCatalog: ProductItem[] = [
         internalSku: "INT-CARGO-HL",
         mappingStatus: "mapped",
         mappingDate: "2026-07-06",
+        barcode: "BAR-008",
       },
     ],
   },
@@ -147,10 +171,22 @@ export const productCatalog: ProductItem[] = [
         marketplaceSku: "LZ-001",
         mappingStatus: "unmapped",
         suggestedSku: "INT-TAS-MXL",
+        barcode: "BAR-009",
       },
     ],
   },
 ];
+
+export const warehouseCatalog: Record<string, WarehouseItem> = {
+  "INT-KAOS-HL": { code: "INT-KAOS-HL", stock: 25, price: 120000 },
+  "INT-KAOS-PM": { code: "INT-KAOS-PM", stock: 18, price: 135000 },
+  "INT-KAOS-MXL": { code: "INT-KAOS-MXL", stock: 12, price: 145000 },
+  "INT-HOODIE-HL": { code: "INT-HOODIE-HL", stock: 9, price: 240000 },
+  "INT-HOODIE-AM": { code: "INT-HOODIE-AM", stock: 7, price: 250000 },
+  "INT-CARGO-CS": { code: "INT-CARGO-CS", stock: 16, price: 180000 },
+  "INT-CARGO-HL": { code: "INT-CARGO-HL", stock: 22, price: 190000 },
+  "INT-TAS-MXL": { code: "INT-TAS-MXL", stock: 5, price: 220000 },
+};
 
 export const syncHistory: SyncHistoryItem[] = [
   { id: "h1", synchronizedAt: "2026-07-07 09:15", marketplace: "Shopee", totalProducts: 42, successCount: 38, failedCount: 4 },
